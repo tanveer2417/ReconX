@@ -1,0 +1,24 @@
+Metadata-Version: 2.4
+Name: reconx
+Version: 1.0
+Summary: Automated OSINT and Recon CLI tool
+Home-page: https://github.com/mariyafareed/reconx
+Author: Mariya Fareed
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: requests
+Requires-Dist: dnspython
+Requires-Dist: python-whois
+Dynamic: author
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+A Python tool to automate OSINT tasks such as Google/GitHub dorks, metadata extraction, WHOIS, DNS, IP info, and more.
