@@ -7,7 +7,7 @@ setup(
     include_package_data=True,
     entry_points={
         'console_scripts': [
-            'reconx = reconx.main:main',  # Calls the main() function from reconx/main.py
+            'reconx = reconx.main:main',  # Make sure this path is correct!
         ],
     },
     install_requires=[
@@ -15,7 +15,7 @@ setup(
         'dnspython',
         'python-whois',
         'colorama',
-        'beautifulsoup4'
+        'beautifulsoup4',
         'pyfiglet'
     ],
     author='Mariya Fareed, Ruheena Begum, Tanveer Fatima',

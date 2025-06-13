@@ -1,14 +1,14 @@
 import argparse
 import sys
 from reconx.cli import subdomain_cli, osint_cli, hosts_cli, web_cli
-from colorama import Fore, Style, init
+from colorama import Fore, init
 import pyfiglet
 
 # Initialize colorama
 init(autoreset=True)
 
 def print_banner():
-    banner = pyfiglet.figlet_format("RECONX")
+    banner = pyfiglet.figlet_format("ReconX")
     print(Fore.CYAN + banner)
     print(Fore.GREEN + "Automated OSINT and Recon Tool")
     print(Fore.YELLOW + "Developed by: Mariya Fareed, Ruheena Begum, Tanveer Fatima\n")
@@ -43,8 +43,9 @@ def main():
 
     # Subdomain Module
     subdomain_parser = subparsers.add_parser("subdomain", help="Enumerate subdomains using multiple sources")
-    subdomain_parser.add_argument("--domain", required=True, help="Target domain for subdomain enum")
+    subdomain_parser.add_argument("--domain", required=True, help="Target domain for subdomain enumeration")
     subdomain_parser.add_argument("--wordlist", help="Custom wordlist path", default="wordlist.txt")
+    subdomain_parser.add_argument("-v", "--verbose", action="store_true", help="Enable verbose output")
     subdomain_parser.set_defaults(func=subdomain_cli.run)
 
     # OSINT Module
@@ -60,14 +61,17 @@ def main():
     hosts_parser.set_defaults(func=hosts_cli.run)
 
     # Web Analysis Module
-    web_parser = subparsers.add_parser("web", help="Analyze web tech stack and info")
+    web_parser = subparsers.add_parser("web", help="Analyze web technologies used by the target")
     web_parser.add_argument("--domain", required=True, help="Target domain")
     web_parser.set_defaults(func=web_cli.run)
 
     args = parser.parse_args()
 
-    # Reinject silent_mode into args for modules to access
+    # Add silent and verbose flags to args for use in modules
     setattr(args, "silent", silent_mode)
+
+    if not hasattr(args, "verbose"):
+        setattr(args, "verbose", False)
 
     if hasattr(args, "func"):
         args.func(args)

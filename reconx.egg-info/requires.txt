@@ -3,3 +3,4 @@ dnspython
 python-whois
 colorama
 beautifulsoup4
+pyfiglet

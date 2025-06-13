@@ -1,7 +1,7 @@
 import socket
 from colorama import Fore
 
-def dnsx_py(subs):
+def run(subs):
     live = []
     for s in subs:
         try:
@@ -9,4 +9,5 @@ def dnsx_py(subs):
             live.append(s)
         except:
             continue
+    print(Fore.GREEN + f"[+] {len(live)} live subdomains found.")
     return sorted(live)

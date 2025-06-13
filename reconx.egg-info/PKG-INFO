@@ -17,6 +17,7 @@ Requires-Dist: dnspython
 Requires-Dist: python-whois
 Requires-Dist: colorama
 Requires-Dist: beautifulsoup4
+Requires-Dist: pyfiglet
 Dynamic: author
 Dynamic: classifier
 Dynamic: description

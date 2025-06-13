@@ -12,9 +12,17 @@ reconx/cli/__init__.py
 reconx/cli/hosts_cli.py
 reconx/cli/osint_cli.py
 reconx/cli/subdomain_cli.py
+reconx/cli/subfinder_cli.py
+reconx/cli/sublistr3_cli.py
 reconx/cli/web_cli.py
 reconx/core/__init__.py
+reconx/core/amass_py.py
+reconx/core/assetfinder_py.py
+reconx/core/bruteforce_py.py
+reconx/core/dnsx_py.py
 reconx/core/hosts.py
 reconx/core/osint.py
 reconx/core/subdomains.py
+reconx/core/subfinder_py.py
+reconx/core/sublister_py.py
 reconx/core/web_analysis.py
