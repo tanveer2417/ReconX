@@ -1,4 +1,4 @@
-<h1 align="center">🔎 ReconX - Automated Reconnaissance Framework</h1>
+<h1 align="center">🔎 ReconX – eXecute Reconnaissance Smarter Framework</h1>
 
 <p align="center">
   <img src="https://img.shields.io/github/license/tanveer2417/ReconX?style=flat-square" />
@@ -165,21 +165,13 @@ pip install -r requirements.txt
 
 ## 👤 Author
 
+**Mariya Fareed**
+🔗 [GitHub Profile][(https://github.com/mariyafareed)]
+
 **Tanveer Afifa**
-✉️ [tanviafifa@gmail.com](mailto:tanviafifa@gmail.com)
 🔗 [GitHub Profile](https://github.com/tanveer2417)
 
----
-
-## 🤝 Contributing
-
-Contributions are welcome!
-
-1. Fork the repository
-2. Create your branch: `git checkout -b feature/new-feature`
-3. Commit your changes: `git commit -m "Added new feature"`
-4. Push to the branch: `git push origin feature/new-feature`
-5. Open a pull request
+**Ruheena Begum**
 
 ---
 
