@@ -16,6 +16,7 @@ setup(
         'python-whois',
         'colorama',
         'beautifulsoup4'
+        'pyfiglet'
     ],
     author='Mariya Fareed, Ruheena Begum, Tanveer Fatima',
     description='Automated OSINT and Recon CLI tool',
