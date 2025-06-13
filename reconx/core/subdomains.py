@@ -1,8 +1,6 @@
 import requests, dns.resolver, socket, ssl, re
 from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor
-from urllib.parse import urlparse
-import subprocess
 
 def passive_enum_crt(domain):
     url = f"https://crt.sh/?q=%25.{domain}&output=json"
@@ -79,15 +77,6 @@ def subdomain_takeover_check(subdomain):
     except:
         pass
     return False
-
-def reverse_ip_lookup(ip):
-    try:
-        r = requests.get(f"https://api.hackertarget.com/reverseiplookup/?q={ip}")
-        if "error" not in r.text:
-            return r.text.splitlines()
-    except:
-        pass
-    return []
 
 def recursive_search(domain, wordlist, depth=1):
     subs = set(passive_enum_crt(domain))
