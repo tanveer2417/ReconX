@@ -2,6 +2,7 @@ README.md
 setup.py
 reconx/__init__.py
 reconx/main.py
+reconx/subdomains.py
 reconx.egg-info/PKG-INFO
 reconx.egg-info/SOURCES.txt
 reconx.egg-info/dependency_links.txt
@@ -10,5 +11,6 @@ reconx.egg-info/requires.txt
 reconx.egg-info/top_level.txt
 reconx/cli/__init__.py
 reconx/cli/osint_cli.py
+reconx/cli/subdomain_cli.py
 reconx/core/__init__.py
 reconx/core/osint.py
