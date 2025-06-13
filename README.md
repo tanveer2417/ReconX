@@ -181,10 +181,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-> 💡 ReconX simplifies your recon process—use it in CTFs, bug bounty, or red teaming for powerful intelligence at your fingertips.
-
-```
-
----
 
 
