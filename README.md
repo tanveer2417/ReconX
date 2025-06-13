@@ -1,8 +1,3 @@
-
-
----
-
-````markdown
 <h1 align="center">🔎 ReconX - Automated Reconnaissance Framework</h1>
 
 <p align="center">
@@ -51,9 +46,7 @@ venv\Scripts\activate           # For Windows
 
 # Install required Python packages
 pip install -r requirements.txt
-````
 
----
 
 ## ⚙️ Usage
 
