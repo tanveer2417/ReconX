@@ -7,17 +7,23 @@ PUBLIC_SOURCES = [
     ("archive", "https://web.archive.org/cite/{d}"),
 ]
 
-def run(domain):
+def run(domain, silent=False, verbose=False):
     subs = set()
+    
     for name, url_tpl in PUBLIC_SOURCES:
-        print(Fore.BLUE + f"[*] Checking {name} ...")
+        if verbose and not silent:
+            print(Fore.BLUE + f"[*] Checking {name} ...")
+        
         try:
             r = requests.get(url_tpl.format(d=domain), timeout=10)
             if r.ok:
-                for link in BeautifulSoup(r.text, 'html.parser').find_all('a', href=True):
+                soup = BeautifulSoup(r.text, 'html.parser')
+                for link in soup.find_all('a', href=True):
                     href = link['href']
                     if href.endswith(f".{domain}"):
                         subs.add(href)
-        except:
-            pass
+        except Exception as e:
+            if verbose and not silent:
+                print(Fore.RED + f"[!] Error fetching from {name}: {e}")
+
     return sorted(subs)
