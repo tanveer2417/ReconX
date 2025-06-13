@@ -1,6 +1,5 @@
-from reconx.cli import subdomain_cli, osint_cli
 import argparse
-
+from reconx.cli import subdomain_cli, osint_cli
 
 def main():
     parser = argparse.ArgumentParser(description="ReconX: Automated Recon Tool")
