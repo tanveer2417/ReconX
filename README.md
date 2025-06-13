@@ -1,4 +1,4 @@
-<h1 align="center">🔎 ReconX – eXecute Reconnaissance Smarter Framework</h1>
+<h1 align="center">🔎 ReconX – eXecute Reconnaissance Smarter.</h1>
 
 <p align="center">
   <img src="https://img.shields.io/github/license/tanveer2417/ReconX?style=flat-square" />
