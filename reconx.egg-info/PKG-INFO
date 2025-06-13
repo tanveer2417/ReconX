@@ -2,8 +2,8 @@ Metadata-Version: 2.4
 Name: reconx
 Version: 1.0
 Summary: Automated OSINT and Recon CLI tool
-Home-page: https://github.com/mariyafareed/reconx
-Author: Mariya Fareed
+Home-page: https://github.com/tanveer2417/ReconX
+Author: Mariya FareedRuheena BegumTanveer Fatima
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
@@ -12,6 +12,8 @@ Description-Content-Type: text/markdown
 Requires-Dist: requests
 Requires-Dist: dnspython
 Requires-Dist: python-whois
+Requires-Dist: colorama
+Requires-Dist: beautifulsoup4
 Dynamic: author
 Dynamic: classifier
 Dynamic: description
