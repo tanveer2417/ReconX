@@ -1,5 +1,5 @@
+from reconx.cli import subdomain_cli, osint_cli, hosts_cli, web_cli
 import argparse
-from reconx.cli import subdomain_cli, osint_cli
 
 def main():
     parser = argparse.ArgumentParser(description="ReconX: Automated Recon Tool")
@@ -17,6 +17,16 @@ def main():
     osint_parser.add_argument("--ip", help="Target IP address (e.g., 8.8.8.8)")
     osint_parser.add_argument("--file", help="File path for metadata extraction (optional)")
     osint_parser.set_defaults(func=osint_cli.run_osint)
+
+    # Hosts Module
+    hosts_parser = subparsers.add_parser("hosts", help="Run Hosts module")
+    hosts_parser.add_argument("--domain", required=True, help="Target domain")
+    hosts_parser.set_defaults(func=hosts_cli.run)
+
+    # Web Analysis Module
+    web_parser = subparsers.add_parser("web", help="Run Web Analysis module")
+    web_parser.add_argument("--domain", required=True, help="Target domain")
+    web_parser.set_defaults(func=web_cli.run)
 
     args = parser.parse_args()
     if hasattr(args, "func"):

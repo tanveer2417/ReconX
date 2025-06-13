@@ -2,24 +2,47 @@ import requests, dns.resolver, socket, ssl, re
 from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor
 
-def passive_enum_crt(domain):
-    url = f"https://crt.sh/?q=%25.{domain}&output=json"
+def passive_enum_all(domain):
+    crtsh_subs = set()
+    certspotter_subs = set()
+
+    # --- Fetch from crt.sh ---
     try:
+        print("[*] Fetching from crt.sh...")
+        url = f"https://crt.sh/?q=%25.{domain}&output=json"
         resp = requests.get(url, timeout=10)
-        if resp.status_code == 200 and resp.text.strip():
-            try:
-                return sorted({entry['name_value'] for entry in resp.json()})
-            except ValueError:
-                print(f"[!] crt.sh returned invalid JSON for {domain}")
-                return []
+        if resp.status_code == 200:
+            data = resp.json()
+            for entry in data:
+                name = entry.get('name_value')
+                if name:
+                    crtsh_subs.update(name.splitlines())
         else:
-            print(f"[!] crt.sh returned empty or invalid response for {domain}")
-            return []
-    except requests.exceptions.Timeout:
-        print(f"[!] crt.sh request timed out for {domain}")
-    except requests.exceptions.RequestException as e:
+            print(f"[!] crt.sh returned status code {resp.status_code}")
+    except Exception as e:
         print(f"[!] crt.sh error: {e}")
-    return []
+
+    # --- Fetch from Certspotter ---
+    try:
+        print("[*] Fetching from Certspotter...")
+        url = f"https://api.certspotter.com/v1/issuances?domain={domain}&include_subdomains=true&expand=dns_names"
+        headers = {"User-Agent": "Mozilla/5.0"}
+        resp = requests.get(url, headers=headers, timeout=10)
+        if resp.status_code == 200:
+            data = resp.json()
+            for entry in data:
+                dns_names = entry.get("dns_names", [])
+                certspotter_subs.update(dns_names)
+        else:
+            print(f"[!] Certspotter returned status code {resp.status_code}")
+    except Exception as e:
+        print(f"[!] Certspotter error: {e}")
+
+    all_subdomains = crtsh_subs.union(certspotter_subs)
+    clean_subdomains = {sub.lower().strip() for sub in all_subdomains if domain in sub.lower()}
+    
+    return sorted(clean_subdomains)
+
 
 def dns_noerror_enum(domain, wordlist):
     found = []
@@ -41,7 +64,7 @@ def resolve_dns(subdomain):
         for rtype in ['A', 'AAAA', 'MX', 'TXT', 'NS']:
             answers = dns.resolver.resolve(subdomain, rtype, lifetime=2)
             records[rtype] = [str(r.to_text()) for r in answers]
-    except Exception:
+    except:
         pass
     return records
 
@@ -62,7 +85,7 @@ def extract_subs_from_html(domain):
         scripts = soup.find_all("script", {"src": True})
         for tag in scripts:
             src = tag['src']
-            found.update(re.findall(rf"([\w.-]+\.{re.escape(domain)})", src))
+            found.update(re.findall(rf"([\w.-]+\.{domain})", src))
     except:
         pass
     return list(found)
@@ -89,12 +112,11 @@ def subdomain_takeover_check(subdomain):
     return False
 
 def recursive_search(domain, wordlist, depth=1):
-    subs = set(passive_enum_crt(domain))
+    subs = set(passive_enum_all(domain))
     for _ in range(depth):
         new_subs = set()
-        for sub in subs.copy():
-            if sub != domain and domain in sub:
-                new_subs.update(passive_enum_crt(sub))
+        for sub in subs:
+            new_subs.update(passive_enum_all(sub))
         subs.update(new_subs)
     return list(subs)
 
@@ -102,7 +124,7 @@ def run_subdomain_enum(domain, wordlist):
     print(f"[+] Starting subdomain enumeration for {domain}")
     subs = set()
 
-    subs.update(passive_enum_crt(domain))
+    subs.update(passive_enum_all(domain))
     subs.update(bruteforce_enum(domain, wordlist))
     subs.update(extract_subs_from_html(domain))
     subs.update(recursive_search(domain, wordlist, depth=1))

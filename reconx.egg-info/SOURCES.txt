@@ -17,4 +17,4 @@ reconx/core/__init__.py
 reconx/core/hosts.py
 reconx/core/osint.py
 reconx/core/subdomains.py
-reconx/core/web.py
+reconx/core/web_analysis.py
