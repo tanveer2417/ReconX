@@ -11,12 +11,17 @@ setup(
         ],
     },
     install_requires=[
-        'requests',
-        'dnspython',
-        'python-whois',
-        'colorama',
-        'beautifulsoup4',
-        'pyfiglet'
+        'termcolor'
+        'tabulate'
+        'requests'
+        'googlesearch-python'
+        'python-whois'
+        'colorama'
+        'urllib3'
+        'beautifulsoup4'
+        'tldextract'
+        'dnspython'
+        'selenium'
     ],
     author='Mariya Fareed, Ruheena Begum, Tanveer Fatima',
     description='Automated OSINT and Recon CLI tool',
