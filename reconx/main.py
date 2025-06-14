@@ -1,5 +1,6 @@
 import argparse
 import sys
+import time
 from reconx.cli import subdomain_cli, osint_cli, hosts_cli, web_cli
 from colorama import Fore, init
 import pyfiglet
@@ -9,9 +10,23 @@ init(autoreset=True)
 
 def print_banner():
     banner = pyfiglet.figlet_format("ReconX")
-    print(Fore.CYAN + banner)
+    lines = banner.split("\n")
+    
+    # Calculate the max line length to align each column
+    max_length = max(len(line) for line in lines)
+
+    for i in range(1, max_length + 1):
+        for line in lines:
+            print(Fore.CYAN + line[:i])
+        sys.stdout.flush()
+        time.sleep(0.03)  # Typing speed
+        if i != max_length:
+            print("\033[F" * len(lines), end="")  # Move cursor up to overwrite lines
+
     print(Fore.GREEN + "Automated OSINT and Recon Tool")
+    time.sleep(0.1)
     print(Fore.YELLOW + "Developed by: Mariya Fareed, Ruheena Begum, Tanveer Fatima\n")
+    time.sleep(0.1)
 
 def main():
     # Check for --silent before parsing

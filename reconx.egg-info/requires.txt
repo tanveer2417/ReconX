@@ -1,6 +1,1 @@
-requests
-dnspython
-python-whois
-colorama
-beautifulsoup4
-pyfiglet
+termcolortabulaterequestsgooglesearch-pythonpython-whoiscoloramaurllib3beautifulsoup4tldextractdnspythonselenium
